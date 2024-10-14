@@ -4,8 +4,10 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.crypto.SecretKey;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.security.Security;
 import java.util.Base64;
 
@@ -26,12 +28,16 @@ public class Decrypt {
         cipher.init(Cipher.DECRYPT_MODE, originalKey);
 
         // Read the input file to decrypt
-        byte[] encryptedBytes = Files.readAllBytes(Paths.get(input));
-
+        byte[] encryptedBytes;
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(input))) {
+            encryptedBytes = Base64.getDecoder().decode(bis.readAllBytes());
+        }
         // Perform decryption
         byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
 
         // Write decrypted data to output file
-        Files.write(Paths.get(output), decryptedBytes);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(output))) {
+            writer.write(new String(decryptedBytes));
+        }
     }
 }

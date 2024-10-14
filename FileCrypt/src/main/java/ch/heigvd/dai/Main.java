@@ -1,10 +1,6 @@
 package ch.heigvd.dai;
 
-import picocli.CommandLine;
-import ch.heigvd.dai.commands.Root;
-import java.io.File;
-import picocli.CommandLine;
-
+import static ch.heigvd.dai.Decrypt.decrypt;
 import static ch.heigvd.dai.Encrypt.encrypt;
 
 public class Main {
@@ -15,7 +11,9 @@ public class Main {
       System.exit(1);
     }
 
-    encrypt(args[1], args[2]);
+    String secretKey = encrypt(args[1], args[2]);
+
+    decrypt(args[2], "./decrypted.txt", secretKey);
 
 
 
