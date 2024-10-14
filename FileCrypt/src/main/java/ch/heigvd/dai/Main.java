@@ -5,13 +5,18 @@ import ch.heigvd.dai.commands.Root;
 import java.io.File;
 import picocli.CommandLine;
 
+import static ch.heigvd.dai.Encrypt.encrypt;
+
 public class Main {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     // get the arguments and check if they are correct
     if (args.length != 3) {
       System.out.println("Usage: java -jar FileCrypt.jar <mode> <input file> <output file>");
       System.exit(1);
     }
+
+    encrypt(args[1], args[2]);
+
 
 
 
