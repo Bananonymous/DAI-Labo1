@@ -6,7 +6,6 @@ import picocli.CommandLine;
 
 public class Main {
   public static void main(String[] args) throws Exception {
-    }
     // Define command name - source: https://stackoverflow.com/a/11159435
     String jarFilename =
         new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath())

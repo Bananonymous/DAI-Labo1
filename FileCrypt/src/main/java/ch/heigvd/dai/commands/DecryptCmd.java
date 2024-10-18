@@ -9,19 +9,22 @@ import picocli.CommandLine;
 public class DecryptCmd implements Callable<Integer> {
   @CommandLine.ParentCommand protected Root parent;
 
+  @CommandLine.Parameters(index = "0", description = "The deciphering key.")
+  protected String secretKey;
+
   @Override
-  public Integer call() {
+  public Integer call() throws Exception {
     Decryptable decrypter = new Decrypt();
 
     System.out.println(
         "Decrypting "
             + parent.getInputfilename()
             + " with key "
-            + parent.getSecretkey()
+            + secretKey
             + " using Bouncycastle, output in "
             + parent.getOutputfilename());
 
-    decrypter.decrypt(parent.getInputfilename(), parent.getOutputfilename(), parent.getSecretkey());
+    decrypter.decrypt(parent.getInputfilename(), parent.getOutputfilename(), secretKey);
     return 0;
   }
 }

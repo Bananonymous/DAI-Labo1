@@ -10,7 +10,7 @@ public class EncryptCmd implements Callable<Integer> {
   @CommandLine.ParentCommand protected Root parent;
 
   @Override
-  public Integer call() {
+  public Integer call() throws Exception {
     Encryptable encrypter = new Encrypt();
 
     System.out.println(
