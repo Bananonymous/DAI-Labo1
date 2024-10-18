@@ -24,20 +24,11 @@ public class Root {
   @CommandLine.Parameters(index = "1", description = "The name of the output file.")
   protected String Outputfilename;
 
-  @CommandLine.Option(
-      names = {"-k", "--key"},
-      description = "The secret key to decrypt the file.")
-  protected String Secretkey;
-
   public String getInputfilename() {
     return Inputfilename;
   }
 
   public String getOutputfilename() {
     return Outputfilename;
-  }
-
-  public String getSecretkey() {
-    return Secretkey;
   }
 }
